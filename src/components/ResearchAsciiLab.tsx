@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Pause, Play } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import {
   COPY,
   PROFILE_SEED,
@@ -17,7 +17,6 @@ const CHARSET_CYCLE: AsciiCharsetKey[] = ['classic', 'blocks', 'math'];
 
 export function ResearchAsciiLab() {
   const [activeId, setActiveId] = useState<ResearchEngine['id']>('hyper-lll');
-  const [paused, setPaused] = useState(false);
 
   const { ref: sectionRef, visible } = useScrollReveal<HTMLElement>(0.06);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -26,10 +25,8 @@ export function ResearchAsciiLab() {
     RESEARCH_ENGINES.find((e) => e.id === activeId) ?? RESEARCH_ENGINES[0];
 
   const sceneModeRef = useRef<1 | 2 | 3>(activeEngine.sceneMode);
-  const pausedRef = useRef(paused);
 
   sceneModeRef.current = activeEngine.sceneMode;
-  pausedRef.current = paused;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -85,14 +82,14 @@ export function ResearchAsciiLab() {
     let lastDraw = 0;
     let simTime = 1.4;
     let cycleClock = 0;
-    const cycleDuration = 4.6;
+    const cycleDuration = 2.6;
 
     const draw = (now: number) => {
-      if (now - lastDraw >= 45) {
-        const dt = lastDraw === 0 ? 0.045 : Math.min(0.12, (now - lastDraw) / 1000);
+      if (now - lastDraw >= 38) {
+        const dt = lastDraw === 0 ? 0.038 : Math.min(0.12, (now - lastDraw) / 1000);
         lastDraw = now;
 
-        if (!pausedRef.current && !prefersReduced) {
+        if (!prefersReduced) {
           simTime += 0.055;
           cycleClock += dt;
         }
@@ -101,7 +98,7 @@ export function ResearchAsciiLab() {
         const currIndex = Math.floor(totalCycles) % CHARSET_CYCLE.length;
         const nextIndex = (currIndex + 1) % CHARSET_CYCLE.length;
         const localPhase = totalCycles - Math.floor(totalCycles);
-        const sweep = localPhase > 0.76 ? (localPhase - 0.76) / 0.24 : 0;
+        const sweep = localPhase > 0.62 ? (localPhase - 0.62) / 0.38 : 0;
 
         const currentCharset = CHARSET_CYCLE[currIndex];
         const nextCharset = CHARSET_CYCLE[nextIndex];
@@ -179,7 +176,7 @@ export function ResearchAsciiLab() {
           </h2>
         </div>
 
-        {/* Clean inline engine selector tabs + understated pause control */}
+        {/* Clean inline engine selector tabs */}
         <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
           <div
             role="group"
@@ -212,25 +209,6 @@ export function ResearchAsciiLab() {
               );
             })}
           </div>
-
-          <button
-            type="button"
-            onClick={() => setPaused((p) => !p)}
-            aria-label={paused ? copy.play : copy.pause}
-            className="inline-flex items-center gap-1.5 border-l border-white/10 pl-6 pb-2 font-mono text-xs text-zinc-400 transition-colors hover:text-[#F5F5F7] whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FDA4AF]/60"
-          >
-            {paused ? (
-              <>
-                <Play className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>{copy.play}</span>
-              </>
-            ) : (
-              <>
-                <Pause className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>{copy.pause}</span>
-              </>
-            )}
-          </button>
         </div>
       </div>
 
@@ -249,7 +227,6 @@ export function ResearchAsciiLab() {
             data-testid="research-ascii-canvas"
             data-engine={activeEngine.id}
             data-charset="classic"
-            data-paused={String(paused)}
             className="absolute inset-0 block h-full w-full"
           />
 

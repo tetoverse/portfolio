@@ -24,24 +24,30 @@ interface ContactChannel {
 const CONTACT_CHANNELS: ContactChannel[] = [
   {
     index: '01',
+    label: 'Email',
+    value: PROFILE_SEED.email,
+    href: `mailto:${PROFILE_SEED.email}`,
+  },
+  {
+    index: '02',
     label: 'Discord',
     value: PROFILE_SEED.discordHandle,
     action: 'copy-discord',
   },
   {
-    index: '02',
+    index: '03',
     label: 'GitHub',
     value: 'github.com/tetoverse',
     href: PROFILE_SEED.githubUrl,
   },
   {
-    index: '03',
+    index: '04',
     label: 'LinkedIn',
     value: PROFILE_SEED.linkedinDisplay,
     href: PROFILE_SEED.linkedinUrl,
   },
   {
-    index: '04',
+    index: '05',
     label: 'Websites',
     links: [
       { label: 'iloveteto.com', href: 'https://iloveteto.com' },
@@ -53,22 +59,16 @@ const CONTACT_CHANNELS: ContactChannel[] = [
     ],
   },
   {
-    index: '05',
+    index: '06',
     label: 'TikTok',
     value: PROFILE_SEED.tiktokHandle,
     href: PROFILE_SEED.tiktokUrl,
   },
   {
-    index: '06',
+    index: '07',
     label: 'ORCID',
     value: PROFILE_SEED.orcidId,
     href: PROFILE_SEED.orcidUrl,
-  },
-  {
-    index: '07',
-    label: 'Zenodo',
-    value: 'Published Research',
-    href: PROFILE_SEED.zenodoUrl,
   },
 ];
 
@@ -106,14 +106,6 @@ export function ContactSection({
               and full-stack projects. Reach out directly on any channel.
             </p>
           </div>
-
-          <p className="font-mono text-xs text-zinc-500">
-            {PROFILE_SEED.fullName}
-            <span aria-hidden="true" className="mx-2 text-zinc-700">
-              ·
-            </span>
-            {PROFILE_SEED.location}
-          </p>
         </div>
 
         {/* Right 7 cols: Full-Span Unboxed Editorial Contact Ledger */}
@@ -189,12 +181,14 @@ export function ContactSection({
               );
             }
 
+            const isExternal = Boolean(channel.href && !channel.href.startsWith('mailto:'));
+
             return (
               <a
                 key={channel.index}
                 href={channel.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
                 className="group flex w-full items-center justify-between gap-6 py-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FDA4AF]/60 sm:py-6"
               >
                 <div className="flex items-baseline gap-5">

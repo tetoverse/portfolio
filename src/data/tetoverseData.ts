@@ -77,6 +77,7 @@ export const PROFILE_SEED = {
     'https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Hamza%20Mert%20Da%C5%9Fdemir%22&l=list&p=1&s=10&sort=bestmatch',
   discordHandle: 'g37w',
   discordUrl: 'https://discord.com/users/g37w',
+  email: 'support@raseplus.com',
   linkedinDisplay: 'in/hamza-mert-daşdemir',
   linkedinUrl: 'https://www.linkedin.com/in/hamza-mert-da%C5%9Fdemir-526834412/',
   tiktokHandle: '@snox.ies',

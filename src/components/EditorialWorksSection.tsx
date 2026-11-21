@@ -17,8 +17,6 @@ interface EditorialWorksSectionProps {
   onInspectProject: (project: ProjectItem) => void;
 }
 
-const CATEGORIES: ProjectCategory[] = ['all', 'audio-web', 'dev-tools'];
-
 interface CinematicProjectStripProps {
   project: ProjectItem;
   index: number;
@@ -51,12 +49,10 @@ function CinematicProjectStrip({
   const metaParts: string[] = [
     String(index + 1).padStart(2, '0'),
     project.language,
-    `${project.keyMetric.value} ${project.keyMetric.label}`,
   ];
   if (project.stars > 0) {
     metaParts.push(`${project.stars} ★`);
   }
-  metaParts.push(project.year);
 
   return (
     <article
@@ -199,9 +195,6 @@ function CinematicProjectStrip({
 
 export function EditorialWorksSection({
   projects,
-  totalCount,
-  activeCategory,
-  onSelectCategory,
   onResetFilters,
   onInspectProject,
 }: EditorialWorksSectionProps) {
@@ -231,53 +224,12 @@ export function EditorialWorksSection({
         className="reveal-block flex flex-col gap-10 border-b border-white/10 pb-10 lg:flex-row lg:items-end lg:justify-between"
       >
         <div>
-          <p className="font-mono text-xs text-[#FDA4AF] tabular-nums">
-            02. Selected Works
-          </p>
           <h2
             id="works-heading"
-            className="font-editorial mt-3 text-balance text-5xl leading-[1.0] text-[#F5F5F7] sm:text-6xl lg:text-7xl"
+            className="font-editorial text-balance text-5xl leading-[1.0] text-[#F5F5F7] sm:text-6xl lg:text-7xl"
           >
             Selected <em>works.</em>
           </h2>
-        </div>
-
-        {/* Clean single-line underlined category tabs + quiet count */}
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
-          <div
-            role="group"
-            aria-label="Project categories"
-            className="flex flex-wrap items-center gap-x-6 gap-y-2"
-          >
-            {CATEGORIES.map((category) => {
-              const isActive = activeCategory === category;
-              return (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => onSelectCategory(category)}
-                  aria-pressed={isActive}
-                  className={`relative pb-2 text-sm font-medium transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FDA4AF]/60 ${
-                    isActive
-                      ? 'text-[#F5F5F7]'
-                      : 'text-zinc-500 hover:text-zinc-200'
-                  }`}
-                >
-                  {COPY.works.categories[category]}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute inset-x-0 bottom-0 h-[1.5px] bg-[#E11D48] transition-transform duration-300 origin-left ${
-                      isActive ? 'scale-x-100' : 'scale-x-0'
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          <span className="border-l border-white/10 pl-6 font-mono text-xs text-zinc-500 tabular-nums whitespace-nowrap">
-            {String(projects.length).padStart(2, '0')} / {String(totalCount).padStart(2, '0')}
-          </span>
         </div>
       </div>
 

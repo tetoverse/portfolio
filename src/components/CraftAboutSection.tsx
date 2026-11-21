@@ -149,16 +149,6 @@ export function CraftAboutSection({
 
         <div className="flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-xs">
           <a
-            href={PROFILE_SEED.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-zinc-200 transition-colors hover:text-[#FDA4AF]"
-          >
-            <span>{PROFILE_SEED.websiteDisplay}</span>
-            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-          </a>
-
-          <a
             href={PROFILE_SEED.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
