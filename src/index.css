@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "HFH Serif", ui-serif, Georgia, Cambria, serif;
+  --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-background: #090709;
+  --color-primary: #090709;
+  --color-primary-foreground: #f5f5f7;
+}
+
+@layer base {
+  html {
+    background-color: #090709;
+    color: #f5f5f7;
+    font-family: var(--font-sans);
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    letter-spacing: 0.01em;
+    background-color: #090709;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid #fda4af;
+    outline-offset: 3px;
+  }
+}
+
+/* Editorial serif voice matched directly to HalftoneFlowHero */
+.font-editorial {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.font-editorial em {
+  font-style: italic;
+  color: #fda4af;
+}
+
+/* Sculpted hero-matched dark obsidian panels with whisper-subtle halftone texture */
+.halftone-surface {
+  position: relative;
+  background-color: rgba(12, 8, 11, 0.84);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 40px 80px -42px rgba(0, 0, 0, 0.72),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.halftone-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image:
+    radial-gradient(circle at 86% 14%, rgba(225, 29, 72, 0.13), transparent 52%),
+    radial-gradient(rgba(253, 164, 175, 0.12) 1px, transparent 1.15px);
+  background-size: 100% 100%, 10px 10px;
+  mask-image: radial-gradient(ellipse 75% 70% at 88% 12%, rgba(0, 0, 0, 0.7), transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 88% 12%, rgba(0, 0, 0, 0.7), transparent 72%);
+  z-index: 0;
+}
+
+.halftone-dots-scrim {
+  background-image: radial-gradient(rgba(253, 164, 175, 0.14) 1px, transparent 1.2px);
+  background-size: 9px 9px;
+}
+
+/* Primary pill button — exact sibling of .hfh-go in HalftoneFlowHero */
+.halftone-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  background-color: #f5f5f7;
+  color: #090709;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  transition:
+    transform 0.2s cubic-bezier(0.3, 1.5, 0.5, 1),
+    opacity 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.halftone-btn-primary:hover {
+  opacity: 0.94;
+}
+
+.halftone-btn-primary:active {
+  transform: scale(0.97);
+}
+
+.halftone-btn-primary .btn-arrow {
+  transition: transform 0.25s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+
+.halftone-btn-primary:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+/* Secondary frosted capsule button matching hero surface */
+.halftone-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background-color: rgba(14, 10, 13, 0.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #e4e4e7;
+  font-weight: 500;
+  transition:
+    border-color 0.22s ease,
+    background-color 0.22s ease,
+    color 0.22s ease,
+    transform 0.2s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+
+.halftone-btn-ghost:hover {
+  border-color: rgba(253, 164, 175, 0.42);
+  background-color: rgba(24, 15, 20, 0.85);
+  color: #f5f5f7;
+}
+
+.halftone-btn-ghost:active {
+  transform: scale(0.97);
+}
+
+.apple-tv-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition:
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-tv-card:hover,
+.apple-tv-card:focus-visible {
+  box-shadow:
+    0 34px 74px -20px rgba(0, 0, 0, 0.94),
+    0 0 0 1px rgba(253, 164, 175, 0.32),
+    0 18px 46px -22px rgba(225, 29, 72, 0.28);
+}
+
+.cinema-shelf {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cinema-shelf::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes appleFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes modalBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSheetIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes modalContentSwap {
+  from {
+    opacity: 0;
+    transform: translate3d(10px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.apple-enter {
+  animation: appleFadeUp 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.apple-enter-delay-1 {
+  animation-delay: 90ms;
+}
+
+.apple-enter-delay-2 {
+  animation-delay: 170ms;
+}
+
+.apple-enter-delay-3 {
+  animation-delay: 250ms;
+}
+
+.modal-backdrop-in {
+  animation: modalBackdropIn 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.modal-sheet-in {
+  animation: modalSheetIn 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.modal-content-swap {
+  animation: modalContentSwap 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Blur-in reveal aligned with HalftoneFlowHero entrance cadence */
+.reveal-block {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0) scale(0.99);
+  filter: blur(6px);
+  transition:
+    opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-block[data-visible="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .apple-tv-card,
+  .reveal-block {
+    transition: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .apple-enter,
+  .apple-enter-delay-1,
+  .apple-enter-delay-2,
+  .apple-enter-delay-3,
+  .modal-backdrop-in,
+  .modal-sheet-in,
+  .modal-content-swap {
+    animation: none;
+  }
+}
