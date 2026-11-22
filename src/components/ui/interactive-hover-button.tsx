@@ -154,44 +154,18 @@ const IHB_CSS = `
 .ihb-label-window {
   position: relative;
   z-index: 2;
-  display: inline-grid;
-  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
   line-height: 1.15;
   font-size: 14.5px;
   font-weight: 500;
   letter-spacing: 0.015em;
 }
 
-.ihb-label-top,
-.ihb-label-bot {
-  grid-area: 1 / 1;
+.ihb-label-top {
   display: inline-block;
   white-space: nowrap;
-  transition:
-    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 260ms ease;
-}
-
-.ihb-label-top {
   color: #f5f5f7;
-  transform: translateY(0%);
-  opacity: 1;
-}
-
-.ihb-label-bot {
-  color: #ffffff;
-  transform: translateY(120%);
-  opacity: 0;
-}
-
-.ihb-btn:hover .ihb-label-top {
-  transform: translateY(-120%);
-  opacity: 0;
-}
-
-.ihb-btn:hover .ihb-label-bot {
-  transform: translateY(0%);
-  opacity: 1;
 }
 
 .ihb-orb {
@@ -269,8 +243,6 @@ const IHB_CSS = `
     animation: none;
   }
   .ihb-btn,
-  .ihb-label-top,
-  .ihb-label-bot,
   .ihb-orb,
   .ihb-arrow-primary,
   .ihb-arrow-secondary,
@@ -363,9 +335,6 @@ export function InteractiveHoverButton({
 
           <span className="ihb-label-window">
             <span className="ihb-label-top">{children}</span>
-            <span className="ihb-label-bot" aria-hidden="true">
-              {children}
-            </span>
           </span>
 
           <span className="ihb-orb" aria-hidden="true">

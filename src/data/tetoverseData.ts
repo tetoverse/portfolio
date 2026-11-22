@@ -210,7 +210,7 @@ export const COPY = {
     kicker: 'tetoverse · Hamza Mert Daşdemir · Türkiye',
     headline: 'Systems, audio, and number theory.',
     lead: 'Websites, Discord bots, automations, and fast systems.',
-    primaryCta: 'Explore Works',
+    primaryCta: 'Step Inside',
     secondaryCta: 'GitHub Profile',
     scrollHint: 'Scroll to explore',
     metrics: [

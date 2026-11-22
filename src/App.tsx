@@ -6,7 +6,7 @@ import { ResearchAsciiLab } from './components/ResearchAsciiLab';
 import { CraftAboutSection } from './components/CraftAboutSection';
 import { ContactSection } from './components/ContactSection';
 import HalftoneFlowHero from './components/ui/halftone-flow-hero';
-import HalftoneWordmarkFooter from './components/ui/halftone-wordmark-footer';
+import BeamWordmarkFooter from './components/ui/beam-wordmark-footer';
 import {
   CHAPTERS,
   COPY,
@@ -159,8 +159,8 @@ export default function App() {
     window.setTimeout(() => setCopiedDiscord(false), 2200);
   }, []);
 
-  const handleExploreWorks = useCallback(() => {
-    document.getElementById('works')?.scrollIntoView({ behavior: 'smooth' });
+  const handleStepInside = useCallback(() => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   const sceneState = getSectionSceneState(sectionPosition);
@@ -242,7 +242,7 @@ export default function App() {
             prompts={[]}
             showInput={false}
             ctaLabel={COPY.hero.primaryCta}
-            onSubmit={handleExploreWorks}
+            onSubmit={handleStepInside}
             proof=""
             avatars={[]}
             palette="crimson"
@@ -277,25 +277,21 @@ export default function App() {
           onCopyDiscord={handleCopyDiscord}
         />
 
-        {/* Seamless Interactive Halftone Wordmark Footer */}
-        <div>
-          <HalftoneWordmarkFooter
-            wordmark="tetoverse"
-            showHeader={false}
-            palette={{
-              background: 'transparent',
-              ink: '#F5F5F7',
-              warm: '#E11D48',
-            }}
-            dotGap={6}
-            radius={86}
-            crop={0.18}
-            grain={0}
-            fontFamily='"Outfit", system-ui, sans-serif'
-            fontWeight={800}
-            height="clamp(190px, 21vw, 275px)"
-          />
-        </div>
+        {/* Interactive Diagonal Beam Wordmark Footer */}
+        <BeamWordmarkFooter
+          brand={PROFILE_SEED.handle}
+          wordmark={PROFILE_SEED.handle}
+          showTop={false}
+          background="#090709"
+          ink="#F5F5F7"
+          muted="#A1A1AA"
+          accent="#E11D48"
+          wordTop="#7A1C38"
+          wordFoot="#12080D"
+          fontSans='"Outfit", "Inter", system-ui, sans-serif'
+          wordWeight={700}
+          cut={0.1}
+        />
       </main>
 
       {/* Fullscreen Cinema Project Detail Modal */}
