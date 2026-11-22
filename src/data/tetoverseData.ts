@@ -8,7 +8,8 @@ export type AsciiPosterKind =
   | 'sieve'
   | 'lemniscate'
   | 'primes'
-  | 'native';
+  | 'native'
+  | 'dns';
 
 export interface ProjectItem {
   id: string;
@@ -106,7 +107,7 @@ export const PROJECTS_SEED: ProjectItem[] = [
     highlights: [
       'Built on Rust and Tauri v2 so it launches instantly and stays light on RAM',
       'Search, play, and organize YouTube Music and SoundCloud tracks in one place',
-      'Connects directly to RaserWeb for instant song link sharing across devices',
+      'Instant song link sharing and web playback across devices at app.raserapp.online',
     ],
     keyMetric: { value: 'Tauri v2', label: 'Native App' },
   },
@@ -133,27 +134,27 @@ export const PROJECTS_SEED: ProjectItem[] = [
     keyMetric: { value: '0 B', label: 'Prod Cost' },
   },
   {
-    id: 'RaserWeb',
-    repoName: 'RaserWeb',
-    title: 'RaserWeb',
-    category: 'audio-web',
+    id: 'register-the-dev.xyz',
+    repoName: 'register-the-dev.xyz',
+    title: 'the-dev.xyz',
+    category: 'dev-tools',
     language: 'JavaScript',
     year: '2026',
-    stars: 2,
+    stars: 1,
     forks: 0,
-    posterKind: 'relay',
-    techStack: ['Node.js', 'JavaScript', 'Cloudflare', 'Docker'],
-    repoUrl: 'https://github.com/tetoverse/RaserWeb',
-    liveUrl: 'https://app.raserapp.online',
-    tagline: 'Streaming server, link sharing, and web player for Raser',
+    posterKind: 'dns',
+    techStack: ['JavaScript', 'Node.js', 'GitHub Actions', 'Cloudflare'],
+    repoUrl: 'https://github.com/tetoverse/register-the-dev.xyz',
+    liveUrl: 'https://the-dev.xyz',
+    tagline: 'Free *.the-dev.xyz subdomains for developers via GitHub pull requests',
     summary:
-      'The backend and browser player behind Raser—delivering fast audio playback, shareable track links, and a clean Material You interface right in the browser.',
+      'An automated DNS registry where developers claim free *.the-dev.xyz subdomains for portfolios and open-source projects by submitting a JSON record via Pull Request.',
     highlights: [
-      'Fast Node.js streaming backend tuned for instant seeking and smooth playback',
-      'Clean web player ready to use directly in any browser without installation',
-      'Powers live track sharing and sync with the Raser desktop app at app.raserapp.online',
+      'Supports A, AAAA, CNAME, and TXT DNS records including nested subdomains',
+      'Automated PR checks verify GitHub ownership, record syntax, and reserved names',
+      'Syncs merged JSON domain configs straight to live DNS with zero manual overhead',
     ],
-    keyMetric: { value: 'Node 18+', label: 'Stream Server' },
+    keyMetric: { value: '*.the-dev.xyz', label: 'Free DNS' },
   },
 ];
 

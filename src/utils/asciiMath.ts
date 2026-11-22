@@ -285,6 +285,58 @@ export function generateProjectAsciiPoster(
           val = clamp01(border * 0.8 + eq * 0.9);
           break;
         }
+        case 'dns': {
+          // 3D spinning wireframe domain globe + outbound *.the-dev.xyz DNS routing traces & nodes
+          const gx = nx * 1.38;
+          const gy = ny * 1.02;
+          const R = 0.78;
+          const r = Math.hypot(gx, gy);
+
+          let globeVal = 0;
+          if (r <= R) {
+            const z = Math.sqrt(Math.max(0, R * R - r * r)) / R;
+            const lon = Math.atan2(gx / R, z) + phase * 0.48;
+            const lat = Math.asin(Math.max(-1, Math.min(1, gy / R)));
+
+            // Rotating longitude meridians & latitude parallels
+            const meridians = Math.pow(Math.abs(Math.cos(lon * 4)), 14);
+            const parallels = Math.pow(Math.abs(Math.cos(lat * 4)), 14);
+            const equator = Math.exp(-Math.abs(lat) * 16) * 0.65;
+            const depthShade = 0.32 + 0.68 * z;
+            globeVal = (meridians * 0.85 + parallels * 0.75 + equator * 0.5) * depthShade;
+          }
+          // Crisp spherical rim
+          const rim = Math.exp(-Math.abs(r - R) * 18) * 0.9;
+
+          // 4 outbound subdomain endpoint nodes flanking the globe
+          const nodes: ReadonlyArray<[number, number]> = [
+            [-1.16, -0.52],
+            [-1.18, 0.52],
+            [1.16, -0.52],
+            [1.18, 0.52],
+          ];
+          let netVal = 0;
+          for (let i = 0; i < nodes.length; i++) {
+            const [tx, ty] = nodes[i];
+            const nd = Math.hypot((nx - tx) * 1.35, ny - ty);
+            const beaconPulse = 0.72 + 0.28 * Math.sin(phase * 2.1 + i * 1.6);
+            netVal = Math.max(netVal, Math.exp(-nd * 9.5) * 0.95 * beaconPulse);
+
+            // Curved routing link from globe limb to endpoint node
+            const sameSide = nx * tx > 0 && Math.abs(nx) >= 0.45 && Math.abs(nx) <= Math.abs(tx);
+            if (sameSide) {
+              const t = (Math.abs(nx) - 0.45) / Math.max(0.01, Math.abs(tx) - 0.45);
+              const curveY = ty * Math.sin(t * Math.PI * 0.5);
+              const lineDist = Math.abs(ny - curveY);
+              const trace = Math.exp(-lineDist * 22);
+              const packet = 0.35 + 0.65 * Math.pow(0.5 + 0.5 * Math.sin(t * 10 - phase * 2.6 + i * 1.3), 4);
+              netVal = Math.max(netVal, trace * packet * 0.82);
+            }
+          }
+
+          val = clamp01(Math.max(globeVal, rim, netVal));
+          break;
+        }
       }
 
       line += sampleGlyph(val, kind === 'sieve' || kind === 'primes' ? 'math' : 'classic');

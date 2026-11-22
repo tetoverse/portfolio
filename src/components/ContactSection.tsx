@@ -53,7 +53,7 @@ const CONTACT_CHANNELS: ContactChannel[] = [
       { label: 'iloveteto.com', href: 'https://iloveteto.com' },
       { label: 'pirishop.store', href: 'https://pirishop.store' },
       { label: 'tetoverse.is-a.dev', href: 'https://tetoverse.is-a.dev' },
-      { label: 'tetoverse.the-dev.xyz', href: 'https://tetoverse.the-dev.xyz/' },
+      { label: 'the-dev.xyz', href: 'https://the-dev.xyz' },
       { label: 'raseplus.com', href: 'https://raseplus.com' },
       { label: 'app.raserapp.online', href: 'https://app.raserapp.online' },
     ],
@@ -160,7 +160,7 @@ export function ContactSection({
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5 pl-9 font-mono text-xs sm:justify-end sm:pl-0 sm:pt-1.5 sm:text-[13px]">
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-2.5 pl-9 font-mono text-xs sm:grid-cols-[repeat(3,auto)] sm:justify-items-end sm:pl-0 sm:pt-1.5 sm:text-[13px]">
                     {channel.links.map((site) => (
                       <a
                         key={site.label}

@@ -10,16 +10,16 @@ import {
 
 test('filterProjects filters by category and technology case-insensitively', () => {
   const audioOnly = filterProjects(PROJECTS_SEED, 'audio-web', null);
-  assert.equal(audioOnly.length, 2);
+  assert.equal(audioOnly.length, 1);
   assert.ok(audioOnly.every((p) => p.category === 'audio-web'));
 
   const rustOnly = filterProjects(PROJECTS_SEED, 'all', 'rust');
   assert.equal(rustOnly.length, 1);
   assert.equal(rustOnly[0].id, 'Raser');
 
-  const combined = filterProjects(PROJECTS_SEED, 'audio-web', 'Node.js');
+  const combined = filterProjects(PROJECTS_SEED, 'dev-tools', 'Cloudflare');
   assert.equal(combined.length, 1);
-  assert.equal(combined[0].id, 'RaserWeb');
+  assert.equal(combined[0].id, 'register-the-dev.xyz');
 });
 
 test('mergeGitHubRepos updates star/fork counts while preserving curated copy', () => {
@@ -48,6 +48,8 @@ test('countProjectsForTech counts matching stack technologies accurately and kee
   assert.equal(countProjectsForTech(PROJECTS_SEED, 'TypeScript'), 1);
   assert.equal(countProjectsForTech(PROJECTS_SEED, 'PostgreSQL'), 0);
   assert.equal(PROJECTS_SEED.length, 3);
+  assert.equal(PROJECTS_SEED.some((p) => p.id === 'register-the-dev.xyz'), true);
+  assert.equal(PROJECTS_SEED.some((p) => p.id === 'RaserWeb'), false);
   assert.equal(PROJECTS_SEED.some((p) => p.id === 'hyper-lll'), false);
   assert.equal(PROJECTS_SEED.some((p) => p.id === 'prime_hunter'), false);
   assert.equal(RESEARCH_ENGINES.some((e) => e.id === 'hyper-lll'), true);

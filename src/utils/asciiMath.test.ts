@@ -62,6 +62,7 @@ test('generateProjectAsciiPoster produces exact grid dimensions for every poster
     'lemniscate',
     'primes',
     'native',
+    'dns',
   ] as const;
 
   for (const kind of kinds) {
